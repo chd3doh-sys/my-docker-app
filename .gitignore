@@ -1,0 +1,14 @@
+node_modules/
+uploads/
+uploaded files/
+*.log
+.env
+.DS_Store
+CLEANUP_REPORT.md
+debug_*.js
+test_*.js
+*_RESULTS.md
+
+# Docker
+docker-compose.override.yml
+.docker/

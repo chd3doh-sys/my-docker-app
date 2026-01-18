@@ -1,0 +1,12 @@
+node_modules
+npm-debug.log
+.env
+.git
+.gitignore
+README.md
+SETUP.md
+CLEANUP_COMPLETE.md
+CLEANUP_REPORT.md
+*.md
+.vscode
+.idea

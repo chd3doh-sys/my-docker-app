@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOH Central Luzon | Search Portal</title>
+    <meta name="description"
+        content="Official Department of Health Central Luzon search portal for RPO documents and resources.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/png" href="assets/doh_logo.png">
+</head>
+
+<body>
+    <header class="navbar">
+        <div class="navbar-inner">
+            <div class="brand">
+                <img src="assets/doh_logo.png" alt="DOH Logo" class="navbar-logo-main">
+                <div class="brand-text-complex">
+                    <span class="text-top">REPUBLIC OF THE PHILIPPINES</span>
+                    <div class="text-separator"></div>
+                    <span class="text-middle">DEPARTMENT OF HEALTH</span>
+                    <span class="text-bottom">CENTER FOR HEALTH DEVELOPMENT III</span>
+                </div>
+                <img src="assets/bagong_pilipinas.png" alt="Bagong Pilipinas" class="navbar-logo-sub">
+            </div>
+
+            <div class="search-container">
+                <div class="search-input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="main-search" placeholder="Search by keyword, year, or RPO..."
+                        autocomplete="off">
+                    <button class="search-submit-btn" id="main-search-btn">Search</button>
+                </div>
+            </div>
+
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle Dark/Light Mode">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <div id="global-user-display" class="user-display hidden">
+                    <i class="fa-solid fa-circle-user"></i>
+                    <span id="global-user-name">User</span>
+                </div>
+                <button class="btn btn-login" id="login-btn">
+                    <i class="fa-solid fa-user-circle"></i>
+                    <span>Login</span>
+                </button>
+                <button class="btn btn-portal hidden" id="main-portal-btn">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span>Upload Portal</span>
+                </button>
+                <button class="btn btn-logout hidden" id="main-logout-btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Logout</span>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="app-layout">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3><i class="fa-solid fa-folder-tree"></i> Resource Explorer</h3>
+            </div>
+            <nav class="folder-tree">
+                <ul id="year-list">
+                    <!-- Year: 2026 -->
+                    <li class="folder-item" data-year="2026">
+                        <div class="folder-toggle">
+                            <i class="fa-solid fa-chevron-right toggle-icon"></i>
+                            <i class="fa-solid fa-folder"></i>
+                            <span>2026</span>
+                        </div>
+                        <ul class="sub-folder">
+                            <li class="category-item">
+                                <i class="fa-solid fa-folder"></i>
+                                <span>rpo</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Year: 2025 -->
+                    <li class="folder-item" data-year="2025">
+                        <div class="folder-toggle">
+                            <i class="fa-solid fa-chevron-right toggle-icon"></i>
+                            <i class="fa-solid fa-folder"></i>
+                            <span>2025</span>
+                        </div>
+                        <ul class="sub-folder">
+                            <li class="category-item">
+                                <i class="fa-solid fa-folder"></i>
+                                <span>rpo</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Year: 2024 -->
+                    <li class="folder-item" data-year="2024">
+                        <div class="folder-toggle">
+                            <i class="fa-solid fa-chevron-right toggle-icon"></i>
+                            <i class="fa-solid fa-folder"></i>
+                            <span>2024</span>
+                        </div>
+                        <ul class="sub-folder">
+                            <li class="category-item">
+                                <i class="fa-solid fa-folder"></i>
+                                <span>rpo</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Year: 2023 -->
+                    <li class="folder-item" data-year="2023">
+                        <div class="folder-toggle">
+                            <i class="fa-solid fa-chevron-right toggle-icon"></i>
+                            <i class="fa-solid fa-folder"></i>
+                            <span>2023</span>
+                        </div>
+                        <ul class="sub-folder">
+                            <li class="category-item">
+                                <i class="fa-solid fa-folder"></i>
+                                <span>rpo</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Year: 2022 -->
+                    <li class="folder-item" data-year="2022">
+                        <div class="folder-toggle">
+                            <i class="fa-solid fa-chevron-right toggle-icon"></i>
+                            <i class="fa-solid fa-folder"></i>
+                            <span>2022</span>
+                        </div>
+                        <ul class="sub-folder">
+                            <li class="category-item">
+                                <i class="fa-solid fa-folder"></i>
+                                <span>rpo</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Year: 2021 -->
+                    <li class="folder-item" data-year="2021">
+                        <div class="folder-toggle">
+                            <i class="fa-solid fa-chevron-right toggle-icon"></i>
+                            <i class="fa-solid fa-folder"></i>
+                            <span>2021</span>
+                        </div>
+                        <ul class="sub-folder">
+                            <li class="category-item">
+                                <i class="fa-solid fa-folder"></i>
+                                <span>rpo</span>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Year: 2020 -->
+                    <li class="folder-item" data-year="2020">
+                        <div class="folder-toggle">
+                            <i class="fa-solid fa-chevron-right toggle-icon"></i>
+                            <i class="fa-solid fa-folder"></i>
+                            <span>2020</span>
+                        </div>
+                        <ul class="sub-folder">
+                            <li class="category-item">
+                                <i class="fa-solid fa-folder"></i>
+                                <span>rpo</span>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <section class="content-display">
+            <div class="docs-pane">
+                <div class="pane-header">
+                    <div class="pane-header-top">
+                        <div class="pane-title-area">
+                            <h2 id="current-path">Select a Year</h2>
+                            <p id="current-subtext">Viewing resources</p>
+                        </div>
+                        <div class="sort-wrapper">
+                            <span class="sort-label">SORT BY UPLOAD:</span>
+                            <div class="custom-select-wrapper">
+                                <select id="doc-sort" class="sort-dropdown">
+                                    <option value="desc">Newest First</option>
+                                    <option value="asc">Oldest First</option>
+                                </select>
+                                <i class="fa-solid fa-chevron-down select-chevron"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="file-list" class="file-grid">
+                    <!-- Files will be injected here -->
+                    <div class="empty-state">
+                        <i class="fa-solid fa-folder"></i>
+                        <p>Select a folder from the explorer to see documents</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="viewer-pane">
+                <div class="viewer-toolbar">
+                    <div class="viewer-info">
+                        <i class="fa-solid fa-file-pdf"></i>
+                        <span id="viewer-filename">No document selected</span>
+                    </div>
+                    <div class="viewer-actions">
+                        <button class="tool-btn" id="zoom-out" title="Zoom Out"><i
+                                class="fa-solid fa-minus"></i></button>
+                        <span id="zoom-level">100%</span>
+                        <button class="tool-btn" id="zoom-in" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
+                        <div class="v-divider"></div>
+                        <button class="tool-btn" id="print-btn" title="Print"><i class="fa-solid fa-print"></i></button>
+                        <button class="tool-btn" id="download-btn" title="Download"><i
+                                class="fa-solid fa-download"></i></button>
+                    </div>
+                </div>
+                <div class="viewer-content-split">
+                    <div class="viewer-summary-panel hidden" id="viewer-summary-panel">
+                        <div class="summary-body" id="viewer-summary-container">
+                            <!-- Dynamically injected by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="viewer-canvas-wrapper">
+                        <div id="viewer-canvas" class="viewer-canvas">
+                            <div class="viewer-placeholder">
+                                <i class="fa-solid fa-file-invoice"></i>
+                                <p>Select a document to preview</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Department of Health. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <button id="close-modal" class="close-btn">&times;</button>
+
+            <!-- Login View -->
+            <div id="login-view" class="auth-view">
+                <div class="modal-header">
+                    <h3>Welcome Back</h3>
+                    <p class="auth-sub">Enter your credentials to access the portal</p>
+                </div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Enter username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter password" required>
+                    </div>
+                    <div id="login-error" class="login-error"></div>
+                    <button type="submit" class="login-submit-btn">
+                        <span>Sign In</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                    <div class="auth-switch">
+                        <p>Don't have an account? <a href="#" id="switch-to-register">Create one</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Register View -->
+            <div id="register-view" class="auth-view hidden">
+                <div class="modal-header">
+                    <h3>Create Account</h3>
+                    <p class="auth-sub">Join the Department of Health Portal</p>
+                </div>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" placeholder="Choose a username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-doh-id">DOH ID</label>
+                        <input type="text" id="reg-doh-id" placeholder="Enter your DOH Employee ID" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" placeholder="Choose a password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-confirm">Confirm Password</label>
+                        <input type="password" id="reg-confirm" placeholder="Confirm your password" required>
+                    </div>
+                    <div id="register-error" class="login-error"></div>
+                    <button type="submit" class="login-submit-btn secondary">
+                        <span>Create Account</span>
+                    </button>
+
+                    <div class="auth-switch">
+                        <p>Already have an account? <a href="#" id="switch-to-login">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="upload-page" class="upload-page hidden">
+        <div class="portal-layout">
+            <!-- Portal Sidebar -->
+            <aside class="portal-sidebar">
+                <div class="portal-brand">
+                    <img src="assets/doh_logo.png" alt="DOH Logo" class="navbar-logo"
+                        style="width: 32px; height: 32px;">
+                    <span>Portal</span>
+                </div>
+
+                <div class="portal-user-card">
+                    <div class="user-avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="user-info">
+                        <span id="current-user-name" class="user-name">User</span>
+                        <span id="current-user-role" class="user-role">Member</span>
+                    </div>
+                </div>
+
+                <nav class="portal-nav">
+                    <button class="nav-item active" data-target="view-upload">
+                        <i class="fa-solid fa-file-arrow-up"></i>
+                        <span>Upload Documents</span>
+                    </button>
+                    <button class="nav-item hidden" id="nav-admin-dashboard" data-target="view-admin">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        <span>Admin Dashboard</span>
+                    </button>
+                </nav>
+
+                <div class="portal-footer">
+                    <button id="portal-back-btn" class="nav-item secondary">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <span>Back to Explorer</span>
+                    </button>
+                    <button id="logout-btn" class="nav-item danger">
+                        <i class="fa-solid fa-right-from-bracket"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Portal Main Content -->
+            <main class="portal-content">
+                <div class="portal-top-bar">
+                    <button class="theme-toggle" id="portal-theme-toggle" title="Toggle Dark/Light Mode">
+                        <i class="fa-solid fa-moon"></i>
+                    </button>
+                </div>
+
+                <!-- View: Upload -->
+                <div id="view-upload" class="portal-view active">
+                    <header class="view-header">
+                        <h2>Upload Documents</h2>
+                        <p>Add new RPO documents to the secure database</p>
+                    </header>
+
+                    <div class="upload-grid">
+                        <div class="upload-card">
+                            <div class="upload-box" id="upload-box">
+                                <div class="upload-icon-circle">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                </div>
+                                <h3>Drag & Drop PDF</h3>
+                                <p>or click to browse files</p>
+                                <input type="file" id="file-input" accept=".pdf" multiple hidden>
+                                <span class="file-hint">Max 50MB per file</span>
+                            </div>
+                        </div>
+
+                        <div class="upload-status-card">
+                            <div class="status-header">
+                                <h4>Ready to Upload</h4>
+                                <span id="file-count" class="badge">0</span>
+                            </div>
+
+                            <div id="upload-file-list" class="mini-file-list">
+                                <div class="empty-list-state">
+                                    No files selected
+                                </div>
+                            </div>
+
+                            <!-- OCR Reminder -->
+                            <div class="ocr-reminder-box">
+                                <div class="ocr-reminder-header">
+                                    <i class="fa-solid fa-circle-exclamation"></i>
+                                    <span>OCR Requirement</span>
+                                </div>
+                                <p class="ocr-reminder-text">
+                                    <strong>SYSTEM STRICTLY REQUIRES OCR READY FILES.</strong> Please ensure your PDF
+                                    file
+                                    is OCR-enabled (Optical Character Recognition) before uploading to ensure
+                                    searchability.
+                                </p>
+                            </div>
+
+                            <div class="upload-actions">
+                                <!-- OCR Confirmation Checkbox -->
+                                <div class="ocr-checkbox-container">
+                                    <label class="ocr-checkbox-label">
+                                        <input type="checkbox" id="ocr-confirm-checkbox" class="ocr-checkbox">
+                                        <span class="checkbox-text">I confirm that this file is OCR-ready and
+                                            searchable</span>
+                                    </label>
+                                </div>
+
+                                <button id="upload-btn" class="btn-primary-large" disabled>
+                                    <span>Start Upload</span>
+                                    <i class="fa-solid fa-arrow-right"></i>
+                                </button>
+
+                                <div id="upload-progress" class="upload-progress-micro hidden">
+                                    <div class="progress-bar">
+                                        <div id="progress-fill" class="progress-fill"></div>
+                                    </div>
+                                    <span id="progress-text">Processing...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View: Admin Dashboard -->
+                <div id="view-admin" class="portal-view hidden">
+                    <header class="view-header">
+                        <h2>System Administration</h2>
+                        <p>Manage users and secure documents</p>
+                    </header>
+
+                    <div class="dashboard-stats">
+                        <div class="stat-card">
+                            <i class="fa-solid fa-users"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="stat-total-users">-</span>
+                                <span class="stat-label">Total Users</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fa-solid fa-file-shield"></i>
+                            <div class="stat-info">
+                                <span class="stat-value" id="stat-total-docs">-</span>
+                                <span class="stat-label">Documents</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fa-solid fa-server"></i>
+                            <div class="stat-info">
+                                <span class="stat-value">Healthy</span>
+                                <span class="stat-label">System Status</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-tabs">
+                        <button class="dash-tab active" data-tab="user-mgmt" id="tab-user-mgmt">Users</button>
+                        <button class="dash-tab" data-tab="doc-mgmt" id="tab-doc-mgmt">Documents</button>
+                    </div>
+
+                    <div id="user-mgmt-view" class="dashboard-panel hidden">
+                        <div class="panel-toolbar">
+                            <input type="text" placeholder="Search users..." class="panel-search">
+                            <button class="btn-icon-only" onclick="refreshUsers()"><i
+                                    class="fa-solid fa-rotate-right"></i></button>
+                        </div>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>User</th>
+                                    <th>DOH ID</th>
+                                    <th>Role</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="user-table-body">
+                                <!-- Users Injected Here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="doc-mgmt-view" class="dashboard-panel hidden">
+                        <div class="panel-toolbar">
+                            <input type="text" placeholder="Search documents..." class="panel-search"
+                                id="admin-doc-search">
+
+                            <div class="bulk-actions-group">
+                                <select id="admin-year-select" class="panel-select">
+                                    <option value="">Select Year...</option>
+                                </select>
+                                <button class="btn btn-info" onclick="handleYearArchive()">
+                                    <i class="fa-solid fa-file-zipper"></i>
+                                    <span>Archive ZIP</span>
+                                </button>
+                                <button class="btn btn-danger" onclick="handleYearDelete()">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    <span>Delete Year</span>
+                                </button>
+                                <button class="btn btn-danger" id="bulk-delete-btn" style="display: none;"
+                                    onclick="bulkDeleteDocuments()">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                    <span>Delete Selected</span>
+                                </button>
+                            </div>
+
+                            <button class="btn-icon-only" onclick="refreshDocs()"><i
+                                    class="fa-solid fa-rotate-right"></i></button>
+                        </div>
+
+                        <!-- Document Category Sub-tabs -->
+                        <div class="doc-sub-tabs">
+                            <div class="sub-tab active" data-type="all">All Documents</div>
+                            <div class="sub-tab" data-type="rpo">RPO</div>
+                            <div class="sub-tab" data-type="advisory">Advisory</div>
+                            <div class="sub-tab" data-type="unsorted">Untagged</div>
+                        </div>
+
+                        <div class="admin-table-wrapper">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 130px;">
+                                            <div style="display: flex; align-items: center; gap: 0.6rem; cursor: pointer;"
+                                                onclick="const cb = document.getElementById('admin-doc-select-all'); cb.checked = !cb.checked; toggleSelectAllDocs(cb.checked);">
+                                                <input type="checkbox" id="admin-doc-select-all"
+                                                    style="cursor: pointer;"
+                                                    onclick="event.stopPropagation(); toggleSelectAllDocs(this.checked)">
+                                                <span
+                                                    style="white-space: nowrap; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;">Select
+                                                    All</span>
+                                            </div>
+                                        </th>
+                                        <th>Subject / Filename</th>
+                                        <th>Year</th>
+                                        <th>Type</th>
+                                        <th>RPO No.</th>
+                                        <th>Uploader</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-doc-table-body">
+                                    <!-- Documents Injected Here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div id="admin-doc-pagination" class="pagination-controls">
+                            <!-- Pagination Buttons Here -->
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Custom Confirmation Modal -->
+    <div id="confirm-modal" class="modal">
+        <div class="modal-content confirmation-modal">
+            <div class="confirm-header">
+                <div class="confirm-icon danger">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h3 id="confirm-title">Are you sure?</h3>
+                <p id="confirm-message">This action cannot be undone.</p>
+            </div>
+            <div class="confirm-actions">
+                <button id="confirm-cancel" class="btn btn-login">Cancel</button>
+                <button id="confirm-proceed" class="btn btn-danger">Yes, Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
