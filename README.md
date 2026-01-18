@@ -1,100 +1,95 @@
 # Department of Health - Document Upload System
 
-## Backend Setup Instructions
+This is a modern, containerized document management system for the Department of Health (DOH) to upload, search, and archive PDF documents (RPO and Advisories) with automated metadata extraction.
+
+## 🚀 Quick Start (Docker)
+
+The fastest way to get started is using **Docker Desktop**.
+
+1. **Clone the repository** (if not already done)
+2. **Start the application**:
+   ```bash
+   docker-compose up -d
+   ```
+3. **Access the app**: http://localhost:3000
+
+---
+
+## 🛠️ Manual Backend Setup
+
+If you prefer to run it without Docker:
 
 ### Prerequisites
-1. **Node.js** (v14 or higher) - [Download here](https://nodejs.org/)
-2. **MySQL 8.0** - Make sure it's installed and running
+1. **Node.js** (v18 or higher)
+2. **MySQL 8.0**
 
-### Database Setup
+### 1. Database Configuration
+1. Create the database in MySQL:
+   ```sql
+   CREATE DATABASE IF NOT EXISTS anti_gravity_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+   ```
+2. Create a `.env` file in the root directory (use `.env.example` as a template):
+   ```env
+   DB_HOST=localhost
+   DB_USER=root
+   DB_PASSWORD=your_password
+   DB_NAME=anti_gravity_db
+   PORT=3000
+   ```
 
-1. **Create the database** (if it doesn't exist):
-```sql
-CREATE DATABASE IF NOT EXISTS anti_gravity_db 
-CHARACTER SET utf8mb4 
-COLLATE utf8mb4_unicode_ci;
-```
-
-2. **Update MySQL credentials** in `server.js`:
-```javascript
-const pool = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'YOUR_MYSQL_PASSWORD', // Update this!
-    database: 'anti_gravity_db',
-    // ...
-});
-```
-
-### Installation Steps
-
-1. **Install dependencies**:
+### 2. Installation
 ```bash
 npm install
 ```
 
-2. **Start the server**:
+### 3. Initialize Database
+You can either start the server or run the init script:
 ```bash
-npm start
+node init_db.js
 ```
 
-Or for development with auto-restart:
+### 4. Start the Server
 ```bash
+npm start
+# or for development
 npm run dev
 ```
 
-3. **Verify the server is running**:
-   - Open browser to: http://localhost:3000/api/test-db
-   - You should see: `{"success":true,"message":"Database connection successful"}`
+---
 
-### Using the Application
+## 📂 Project Structure
 
-1. **Start the backend server** (as shown above)
-2. **Open the frontend**: Open `index.html` in your browser
-3. **Login** with username: `admin`, password: `admin`
-4. **Upload PDFs**: Select a PDF file, confirm it's OCR-enabled, and click Upload
-
-### Database Table Structure
-
-The server automatically creates this table:
-
-```sql
-CREATE TABLE uploaded_documents (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    filename VARCHAR(255) NOT NULL,
-    original_filename VARCHAR(255) NOT NULL,
-    file_path VARCHAR(500) NOT NULL,
-    file_size BIGINT NOT NULL,
-    is_ocr_enabled BOOLEAN DEFAULT TRUE,
-    upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    uploaded_by VARCHAR(100) DEFAULT 'admin',
-    INDEX idx_upload_date (upload_date),
-    INDEX idx_filename (filename)
-);
+```
+App-Search/
+├── server.js                 # Main Express server (API & UI)
+├── init_db.js               # Database initialization script
+├── .env                     # Environment variables (ignored by git)
+├── .env.example             # Example environment variables
+├── docker-compose.yml       # Docker orchestration
+├── Dockerfile               # Node.js container config
+├── public/                  # Frontend assets
+│   ├── index.html           # Main UI
+│   ├── script.js            # Frontend logic
+│   └── style.css            # Custom CSS
+└── uploaded files/          # Storage for PDF uploads (git ignored)
 ```
 
-### API Endpoints
+## 🔐 Authentication
+- **Default Admin**:
+  - Username: `admin`
+  - Password: `admin`
+- New users can register and wait for admin activation via the Admin Dashboard.
 
-- `POST /api/login` - User authentication
-- `POST /api/upload` - Upload PDF document
-- `GET /api/documents` - Get all uploaded documents
-- `GET /api/test-db` - Test database connection
+## 🔍 Features
+- **Auto-Extraction**: Automatically extracts RPO numbers, subjects, and years from PDFs.
+- **Smart Search**: Search by filename, subject, or year.
+- **Archive**: Download all documents from a specific year as a ZIP file.
+- **Admin Dashboard**: Manage documents and user roles/status.
 
-### Uploaded Files
+## ⚠️ Troubleshooting
+- **Database Connection**: Ensure MySQL is running and credentials in `.env` are correct.
+- **Upload Errors**: Check the console logs for OCR or file system permission errors.
+- **Network**: The backend runs on port 3000 by default. Ensure it's not blocked.
 
-Files are stored in the `./uploads` directory with unique filenames.
-
-### Troubleshooting
-
-**Error: "Cannot connect to database"**
-- Make sure MySQL is running
-- Check your MySQL credentials in `server.js`
-- Verify the database `anti_gravity_db` exists
-
-**Error: "Port 3000 already in use"**
-- Change the PORT in `server.js` to another number (e.g., 3001)
-- Update the fetch URL in `script.js` accordingly
-
-**Error: "CORS policy"**
-- The server has CORS enabled by default
-- If issues persist, check your browser console for specific errors
+## 📝 License
+ISC

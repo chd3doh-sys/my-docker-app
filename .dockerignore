@@ -9,4 +9,5 @@ CLEANUP_COMPLETE.md
 CLEANUP_REPORT.md
 *.md
 .vscode
-.idea
+uploaded files/
+.DS_Store

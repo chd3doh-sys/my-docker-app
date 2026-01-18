@@ -32,14 +32,17 @@ Added patterns to exclude:
 ```
 App-Search/
 ├── server.js                 # Main application server
-├── init_db.js               # Database initialization
+├── init_db.js               # Database initialization script
 ├── package.json             # Dependencies
 ├── package-lock.json        # Locked dependencies
 ├── .gitignore              # Git exclusions
-├── public/
+├── .env.example            # Template for environment variables
+├── docker-compose.yml      # Docker orchestration
+├── Dockerfile              # Container configuration
+├── public/                 # Frontend assets
 │   ├── index.html          # Main HTML
 │   ├── script.js           # Frontend JavaScript
-│   ├── style.css           # Styles (cleaned)
+│   ├── style.css           # Styles
 │   └── assets/             # Images and logos
 └── uploaded files/         # User uploads (excluded from git)
 ```

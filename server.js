@@ -8,9 +8,22 @@ const bcrypt = require('bcrypt');
 const pdf = require('pdf-parse');
 const archiver = require('archiver');
 const fsSync = require('fs');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Test-db endpoint
+app.get('/api/test-db', async (req, res) => {
+    try {
+        const connection = await pool.getConnection();
+        connection.release();
+        res.json({ success: true, message: 'Database connection successful' });
+    } catch (error) {
+        console.error('Database connection test failed:', error);
+        res.status(500).json({ success: false, message: 'Database connection failed', error: error.message });
+    }
+});
 
 // Middleware
 app.use(cors());
