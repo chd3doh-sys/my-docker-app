@@ -820,6 +820,18 @@ function syncUserDisplay() {
     } else {
         navAdminDashboard.classList.add('hidden');
     }
+
+    // NEW: Handle Role-Based Action Buttons (Delete Year, etc)
+    const deleteYearBtn = document.querySelector('button[onclick="handleYearDelete()"]');
+    const selectAllContainer = document.querySelector('th div[onclick*="toggleSelectAllDocs"]');
+
+    if (currentUser.role !== 'admin') {
+        if (deleteYearBtn) deleteYearBtn.style.display = 'none';
+        if (selectAllContainer) selectAllContainer.style.visibility = 'hidden';
+    } else {
+        if (deleteYearBtn) deleteYearBtn.style.display = 'inline-flex';
+        if (selectAllContainer) selectAllContainer.style.visibility = 'visible';
+    }
 }
 
 
@@ -1279,7 +1291,9 @@ function renderAdminDocsPage() {
         const row = document.createElement('tr');
         row.innerHTML = `
             <td>
-                <input type="checkbox" class="doc-row-select" data-id="${doc.id}" onclick="updateBulkDeleteVisibility()">
+                ${currentUser.role === 'admin' ?
+                `<input type="checkbox" class="doc-row-select" data-id="${doc.id}" onclick="updateBulkDeleteVisibility()">` :
+                ''}
             </td>
             <td>
                 <div style="display: flex; align-items: center; gap: 0.75rem;">
@@ -1308,17 +1322,20 @@ function renderAdminDocsPage() {
                     <button class="btn-icon-only view-doc-btn" title="View">
                         <i class="fa-solid fa-eye"></i>
                     </button>
+                    ${currentUser.role === 'admin' ? `
                     <button class="btn btn-danger delete-doc-btn" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;">
                         <i class="fa-solid fa-trash-can"></i>
                         <span>Delete</span>
-                    </button>
+                    </button>` : ''}
                 </div>
             </td>
         `;
 
         // Direct event listeners to handle quotes safely
         row.querySelector('.view-doc-btn').addEventListener('click', () => window.open(doc.url, '_blank'));
-        row.querySelector('.delete-doc-btn').addEventListener('click', () => deleteDocument(doc.id, doc.name));
+        if (currentUser.role === 'admin') {
+            row.querySelector('.delete-doc-btn').addEventListener('click', () => deleteDocument(doc.id, doc.name));
+        }
 
         adminDocTableBody.appendChild(row);
     });
