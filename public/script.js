@@ -1154,19 +1154,17 @@ async function loadUsers(query = '') {
 
                 const toggleBtn = document.createElement('button');
                 toggleBtn.type = 'button';
-                toggleBtn.className = 'btn-activate';
-
                 if (user.status === 'pending') {
-                    toggleBtn.innerHTML = `<i class="fa-solid fa-user-check" style="pointer-events: none"></i> <span style="pointer-events: none">Activate</span>`;
-                    toggleBtn.style.background = 'var(--primary-color)';
+                    toggleBtn.className = 'btn-action btn-action-activate';
+                    toggleBtn.innerHTML = `<i class="fa-solid fa-user-check"></i><span>Activate</span>`;
                     toggleBtn.addEventListener('click', (e) => {
                         e.preventDefault();
                         e.stopPropagation();
                         updateUserStatus(user.id, 'active');
                     });
                 } else {
-                    toggleBtn.style.background = '#64748b';
-                    toggleBtn.innerHTML = `<i class="fa-solid fa-user-slash" style="pointer-events: none"></i> <span style="pointer-events: none">Deactivate</span>`;
+                    toggleBtn.className = 'btn-action btn-action-deactivate';
+                    toggleBtn.innerHTML = `<i class="fa-solid fa-user-slash"></i><span>Deactivate</span>`;
                     toggleBtn.addEventListener('click', (e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -1176,14 +1174,15 @@ async function loadUsers(query = '') {
 
                 const deleteUserBtn = document.createElement('button');
                 deleteUserBtn.type = 'button';
-                deleteUserBtn.className = 'btn-danger';
-                deleteUserBtn.innerHTML = `<i class="fa-solid fa-trash-can" style="pointer-events: none"></i> <span style="pointer-events: none">Delete</span>`;
+                deleteUserBtn.className = 'btn-action btn-action-delete';
+                deleteUserBtn.innerHTML = `<i class="fa-solid fa-trash-can"></i><span>Delete</span>`;
                 deleteUserBtn.addEventListener('click', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     deleteUser(user.id, user.username);
                 });
 
+                actionsCell.className = 'user-actions-cell'; // Ensure standard class
                 actionsCell.appendChild(toggleBtn);
                 actionsCell.appendChild(deleteUserBtn);
                 userTableBody.appendChild(tr);
