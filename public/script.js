@@ -330,7 +330,6 @@ function renderDocuments(docs) {
                         ${doc.subject || doc.name}
                     </span>
                     <span class="file-meta" style="margin-top: 6px; display: block;">
-                        ${doc.rpo_number ? `<span style="color: var(--primary-color); font-weight: 700;">${doc.rpo_number}</span> • ` : ''}
                         ${doc.name} • ${doc.size}
                     </span>
                     <div style="font-size: 0.7rem; color: #94a3b8; font-weight: 500; margin-top: 6px;">
