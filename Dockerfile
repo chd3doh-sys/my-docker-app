@@ -14,7 +14,7 @@ RUN npm install --production
 COPY . .
 
 # Create upload directory
-RUN mkdir -p "uploaded files"
+RUN mkdir -p uploads
 
 # Expose the application port
 EXPOSE 3000

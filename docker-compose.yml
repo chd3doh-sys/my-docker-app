@@ -38,9 +38,10 @@ services:
       - DB_USER=root
       - DB_PASSWORD=r00t
       - DB_NAME=anti_gravity_db
+      - UPLOAD_PATH=/app/uploads
       - PORT=3000
     volumes:
-      - ./uploaded files:/app/uploaded files
+      - ${UPLOAD_PATH:-./uploaded files}:/app/uploads
       - ./public:/app/public
     depends_on:
       mysql:

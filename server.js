@@ -12,6 +12,7 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const UPLOAD_DIR = process.env.UPLOAD_PATH || 'uploaded files';
 
 // Test-db endpoint
 app.get('/api/test-db', async (req, res) => {
@@ -29,12 +30,12 @@ app.get('/api/test-db', async (req, res) => {
 app.use(cors());
 app.use(express.json());
 app.use(express.static('public'));
-app.use('/files', express.static(path.join(__dirname, 'uploaded files')));
+app.use('/files', express.static(path.resolve(UPLOAD_DIR)));
 
 // Configure multer for basic file uploads
 const storage = multer.diskStorage({
     destination: async (req, file, cb) => {
-        const uploadDir = './uploaded files';
+        const uploadDir = path.resolve(UPLOAD_DIR);
         try {
             await fs.mkdir(uploadDir, { recursive: true });
             cb(null, uploadDir);
@@ -320,7 +321,7 @@ app.get('/api/archive/year/:year', async (req, res) => {
         res.attachment(archiveName);
         archive.pipe(res);
 
-        const uploadDir = path.join(__dirname, 'uploaded files');
+        const uploadDir = path.resolve(UPLOAD_DIR);
 
         for (const doc of docs) {
             const filePath = path.join(uploadDir, doc.filename);
@@ -417,7 +418,7 @@ app.delete('/api/documents/:id', async (req, res) => {
         const [docs] = await pool.query('SELECT filename FROM uploaded_documents WHERE id = ?', [id]);
         if (docs.length > 0) {
             const fileName = docs[0].filename;
-            const fullPath = path.join(__dirname, 'uploaded files', fileName);
+            const fullPath = path.join(path.resolve(UPLOAD_DIR), fileName);
             await pool.query('DELETE FROM uploaded_documents WHERE id = ?', [id]);
             try { await fs.unlink(fullPath); } catch (err) { }
             res.json({ success: true, message: 'Document deleted successfully' });
@@ -436,7 +437,7 @@ app.delete('/api/documents/year/:year', async (req, res) => {
         const [docs] = await pool.query('SELECT filename FROM uploaded_documents WHERE doc_year = ?', [year]);
         await pool.query('DELETE FROM uploaded_documents WHERE doc_year = ?', [year]);
         for (const doc of docs) {
-            try { await fs.unlink(path.join(__dirname, 'uploaded files', doc.filename)); } catch (err) { }
+            try { await fs.unlink(path.join(path.resolve(UPLOAD_DIR), doc.filename)); } catch (err) { }
         }
         res.json({ success: true, message: `Successfully deleted all documents from ${year}` });
     } catch (error) {
@@ -461,7 +462,7 @@ app.post('/api/documents/bulk-delete', async (req, res) => {
         // Delete files
         for (const doc of docs) {
             try {
-                const fullPath = path.join(__dirname, 'uploaded files', doc.filename);
+                const fullPath = path.join(path.resolve(UPLOAD_DIR), doc.filename);
                 await fs.unlink(fullPath);
             } catch (err) {
                 console.error(`Failed to delete file: ${doc.filename}`, err);
@@ -520,5 +521,6 @@ app.delete('/api/users/:id', async (req, res) => {
 
 app.listen(PORT, async () => {
     await initializeDatabase();
+    console.log(`📁 Files will be stored in: ${path.resolve(UPLOAD_DIR)}`);
     console.log(`🚀 Clean server running on http://localhost:${PORT}`);
 });
