@@ -8,7 +8,7 @@ services:
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: r00t
-      MYSQL_DATABASE: anti_gravity_db
+      MYSQL_DATABASE: chd3
       MYSQL_CHARACTER_SET_SERVER: utf8mb4
       MYSQL_COLLATION_SERVER: utf8mb4_unicode_ci
     ports:
@@ -37,7 +37,7 @@ services:
       - DB_HOST=mysql
       - DB_USER=root
       - DB_PASSWORD=r00t
-      - DB_NAME=anti_gravity_db
+      - DB_NAME=chd3
       - UPLOAD_PATH=/app/uploads
       - PORT=3000
     volumes:
