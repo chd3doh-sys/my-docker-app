@@ -1,4 +1,8 @@
 
+## [%Y->- (HEAD -> main) e04fef4299855780bf0b526dd11d63466a632546:%M] - redesign ui of deactivate aligned user from table
+- **Commit**: e04fef4
+
+
 ## [%Y->- (HEAD -> main) 956854682fe0ad051e89d948ea01a5dc33a79eaf:%M] - added changelog
 - **Commit**: 9568546
 
